@@ -34,7 +34,7 @@ of the journey and the fuel used seperated by a space (<Enter> to quit): ")\
         except (SyntaxError, NameError, TypeError, ValueError, IndexError):
             print("You have to enter your numbers seperated by a space.")
             continue
-        if leg < 0 or fuel < 0:
+        if leg < 0 or fuel < 0 or (leg - legLength[-1]) < 0:
             print("You can't travel negative distance or gain fuel.")
             continue
         else:
@@ -59,7 +59,7 @@ def calcMPG(legLength, legFuel):
             fuel = legFuel[i]
             mpg = dist / fuel
 
-            print("Leg {0}: The MPG for this {1} mile leg is {2:0.1f}."\
+            print("Leg {0}: The MPG for this {1} mile leg is {2:0.1f} mpg."\
                 .format(i+1, dist, mpg))
 
             i += 1
@@ -84,7 +84,7 @@ gallon used on each leg of a trip and the overall trip.")
     # Return the overall mpg and distance
     dist, mpg = calcMPG(legLength, legFuel)
             
-    print("The overall MPG for this {0} mile trip is {1:0.1f}."\
+    print("The overall MPG for this {0} mile trip is {1:0.1f} mpg."\
         .format(dist, mpg))
 
 main()
