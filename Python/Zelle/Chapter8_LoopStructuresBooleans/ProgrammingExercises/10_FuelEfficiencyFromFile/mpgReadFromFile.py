@@ -5,7 +5,13 @@
 
 def getFile():
     # Get the file name
-    infileName = input("\nPlease enter your file name: ")
+    while True:
+        try:
+            infileName = input("\nPlease enter your file name: ")
+        except (SyntaxError, NameError, TypeError, ValueError):
+            print("You have to enter a file name.")
+            continue
+        break
 
     return infileName
 
