@@ -12,17 +12,16 @@ Write a program that gets a starting value from the user and then prints the
 Syracuse sequence for that starting value."""
 
 def userInput():
-    try:
-        while True:
+    while True:
+        try:
             val = int(input("Please enter a positive whole number to start \
 the sequence: "))
-            if val > 0:
-                break
-    except (SyntaxError, NameError, TypeError, ValueError) as err:
-        print("You have to enter a positive whole number to start the \
-sequence. Exiting.")
-        print(err.args)
-        quit(0)
+        except (SyntaxError, NameError, TypeError, ValueError):
+            print("You have to enter a positive whole number to start the \
+sequence.")
+            continue
+        if val > 0:
+            break
     return val
 
 def main():

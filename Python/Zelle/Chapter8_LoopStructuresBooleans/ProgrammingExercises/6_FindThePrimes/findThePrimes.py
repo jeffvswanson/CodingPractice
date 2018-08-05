@@ -11,11 +11,11 @@ def getN():
         try:
             n = int(input("Please enter a whole number greater than one you \
 would want to check as prime: "))
-            if n > 1:
-                break
-        except (SyntaxError, NameError, TypeError, ValueError) as err:
+        except (SyntaxError, NameError, TypeError, ValueError):
             print("You have to enter a whole number greater than one.")
             continue
+        if n > 1:
+            break
     return n
 
 def checkPrimes(n):

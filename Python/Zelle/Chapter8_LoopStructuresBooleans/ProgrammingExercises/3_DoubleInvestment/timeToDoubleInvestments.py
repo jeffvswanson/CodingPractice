@@ -8,16 +8,16 @@ double. Note: The amount of the initial investment does not matter; you can
 use $1."""
 
 def getAPR():
-	try:
-		apr = float(input("Please enter the interest rate as a decimal: "))
-	except (SyntaxError, NameError, TypeError, ValueError) as err:
-		print("You have to enter a decimal number for the APR. Exiting.")
-		print(err.args)
-		quit(0)
-	if apr <= 0:
-		print("Investments can't double if they're not greater than zero. \
-Exiting.")
-		quit(0)
+	while True:
+		try:
+			apr = float(input("Please enter the interest rate as a decimal: "))
+		except (SyntaxError, NameError, TypeError, ValueError):
+			print("You have to enter a decimal number for the APR.")
+			continue
+		if apr <= 0:
+			print("Investments can't double if the interest is not greater \
+than zero.")
+			continue
 	return apr
 
 def result(apr, years):
@@ -28,8 +28,8 @@ investment at {0:.1%} APR is {1} of a year.".format(apr, years))
 		print("The amount of time it will take to double the initial \
 investment as {0:.1%} APR is 1 year.".format(apr))
 	else:
-		print("The amount of time it will take to double at a {0:.1%} APR is {1} \
-years.".format(apr, years))
+		print("The amount of time it will take to double at a {0:.1%} APR is \
+{1} years.".format(apr, years))
 
 def main():
 

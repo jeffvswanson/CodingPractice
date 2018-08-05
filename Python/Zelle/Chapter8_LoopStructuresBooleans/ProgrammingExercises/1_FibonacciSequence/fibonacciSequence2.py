@@ -7,13 +7,13 @@ that computes and outputs the nth Fibonacci number, where n is a value entered
 by the user."""
 
 def getInput():
-    try:
-        n = int(input("Please input how many numbers you wish to proceed down \
-the sequence: "))
-    except (SyntaxError, NameError, TypeError, ValueError) as err:
-        print("You have to enter a whole number. Exiting.")
-        print(err.args)
-        quit(0)
+    while True:
+        try:
+            n = int(input("Please input how many numbers you wish to proceed \
+down the sequence: "))
+        except (SyntaxError, NameError, TypeError, ValueError):
+            print("You have to enter a whole number.")
+        continue
     return n
 
 def fibonacciNumber(n):

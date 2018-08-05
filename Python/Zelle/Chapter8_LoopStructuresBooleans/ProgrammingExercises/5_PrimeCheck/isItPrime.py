@@ -8,16 +8,15 @@ should quit as soon as it finds a value that evenly divides n."""
 import math
 
 def getN():
-    try:
-        while True:
+    while True:
+        try:
             n = int(input("Please enter a whole number greater than two you \
 would want to check as prime: "))
-            if n > 2:
-                break
-    except (SyntaxError, NameError, TypeError, ValueError) as err:
-        print("You have to enter a whole number greater than two. Exiting.")
-        print(err.args)
-        quit(0)
+        except (SyntaxError, NameError, TypeError, ValueError):
+            print("You have to enter a whole number greater than two.")
+            continue
+        if n > 2:
+            break
     return n
 
 def primeCheck(n):
