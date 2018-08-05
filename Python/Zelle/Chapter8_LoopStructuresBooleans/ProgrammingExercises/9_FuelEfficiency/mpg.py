@@ -76,6 +76,8 @@ def calcMPG(legLength, legFuel):
     return dist, mpg
 
 def main():
+    print("This program takes odometer and fuel readings to give miles per \
+gallon used on each leg of a trip and the overall trip.")
     # Get the odometer readings and fuel used
     legLength, legFuel = getInput()
     # Calculate and print the leg distance and mpg
