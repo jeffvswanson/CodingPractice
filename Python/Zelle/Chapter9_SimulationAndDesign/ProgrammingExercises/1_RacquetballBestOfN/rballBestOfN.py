@@ -22,10 +22,43 @@ serving. Player A always has the first serve.")
 
 def getInputs():
     # Returns the three simulation parameters.
+    a = b = 0
+    while a + b != 1:
+        print("Player A and Player B probability of winning added together \
+must equal 1.")
+        while True:
+            try:
+                a = float(input("What is the probability player A wins a serve? "))
+            except (SyntaxError, NameError, TypeError, ValueError):
+                print("You have to enter a decimal between 0 and 1.")
+                continue
+            if a > 1 or a < 0:
+                print("You have to enter a decimal between 0 and 1.")
+                continue
+            else: break
 
-    a = float(input("What is the probability player A wins a serve? "))
-    b = float(input("What is the probability player B wins a serve? "))
-    n = int(input("How many games to simulate? "))
+        while True:
+            try:
+                b = float(input("What is the probability player B wins a serve? "))
+            except (SyntaxError, NameError, TypeError, ValueError):
+                print("You have to enter a decimal between 0 and 1.")
+                continue
+            if a > 1 or a < 0:
+                print("You have to enter a decimal between 0 and 1.")
+                continue
+            else: break
+
+    while True:
+        try:
+            n = int(input("How many games to simulate? "))
+        except (SyntaxError, NameError, TypeError, ValueError):
+            print("You have to enter a whole number.")
+            continue
+        if n < 1:
+            print("You have to simulate at least one game.")
+            continue
+        else: break
+            
     return a, b, n
 
 def simNGames(n, probA, probB):
