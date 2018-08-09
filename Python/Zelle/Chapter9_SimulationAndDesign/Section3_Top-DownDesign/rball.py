@@ -20,9 +20,9 @@ def printIntro():
 def getInputs():
 	# Returns the three simulation parameters.
 
-	a = eval(input("What is the probability player A wins a serve? "))
-	b = eval(input("What is the probability player B wins a serve? "))
-	n = eval(input("How many games to simulate? "))
+	a = float(input("What is the probability player A wins a serve? "))
+	b = float(input("What is the probability player B wins a serve? "))
+	n = int(input("How many games to simulate? "))
 	return a, b, n
 
 def simNGames(n, probA, probB):
