@@ -118,6 +118,7 @@ def WalkingWindow(n):
 def goOnAWalk(n, x, y):
     # This module simulates each step of the walk. A random angle is made and
     # used to derive x and y coordinates for the walk.
+    # 2 * math.pi() converts the angle to radians
     angle = random() * 2 * math.pi
     x = x + math.cos(angle)
     y = y + math.sin(angle)
