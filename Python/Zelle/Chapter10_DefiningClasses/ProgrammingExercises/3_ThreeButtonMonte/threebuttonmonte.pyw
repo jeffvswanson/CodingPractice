@@ -53,7 +53,7 @@ def createGameWindow():
 def playTheGame(win, door1, door2, door3, shuffleButton, resultButton):
     # Have the user shuffle the winning door
     pt = win.getMouse()
-    winningDoor = randrange(1,3)
+    winningDoor = randrange(1,4)
     while not shuffleButton.clicked(pt):
         pt = win.getMouse()        
 
