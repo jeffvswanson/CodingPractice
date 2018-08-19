@@ -22,7 +22,7 @@ and the credits the course was worth to get the student's GPA.")
     return studentName
 
 def inputGrades(studentName):
-    pupil = Student(studentName, 0, 0, 0, 0, 0)
+    pupil = Student(studentName, 0, 0, 0, 0)
     grade = 0
     creditHours = 0
     while grade != -1:
