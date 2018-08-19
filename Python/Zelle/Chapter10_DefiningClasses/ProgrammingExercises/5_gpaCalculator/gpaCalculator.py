@@ -35,8 +35,16 @@ and 4.0 (-1 to quit): "))
         except(SyntaxError, NameError, TypeError, ValueError):
             print("You have to enter a number between 0 and 4.")
             continue
-        creditHours = float(input(
-            "Please enter the credits the course is worth: "))
+        while True:
+            try:
+                creditHours = float(input(
+                "Please enter the credits the course is worth: "))
+            except(SyntaxError, NameError, TypeError, ValueError):
+                print("You have to enter a positive number greater than zero.")
+                continue
+            if creditHours <= 0:
+                print("You have to enter a positive number greater than zero.")
+                continue
     return pupil
   
 def main():
