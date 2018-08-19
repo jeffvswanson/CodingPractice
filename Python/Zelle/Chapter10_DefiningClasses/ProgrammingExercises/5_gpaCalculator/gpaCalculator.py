@@ -45,6 +45,8 @@ and 4.0 (-1 to quit): "))
             if creditHours <= 0:
                 print("You have to enter a positive number greater than zero.")
                 continue
+            else: 
+                break
     return pupil
   
 def main():
