@@ -35,34 +35,41 @@ def makeButtons(win):
     frownButton.activate()
     return grimButton, smileButton, winkButton, frownButton, quitButton
 
-def cleanSlate(win, center, size):
+def cleanSlate(win):
     # Function to cover up the face
-    coverUp = Circle(center, size)
-    coverUp.setFill("light gray")
-    coverUp.draw(win)
+    for item in win.items[:]:
+        item.undraw()
+    win.update()
 
 def changeFaces(win, center, size):
-    # Need to figure out a way to get the window to undraw the face before drawing
-    # the next face, otherwise I get an error
     grimButton, smileButton, winkButton, frownButton, quitButton = \
     makeButtons(win)
     theFace = Face(win, center, size)
     pt = win.getMouse()
     while not quitButton.clicked(pt):
         if grimButton.clicked(pt):
-            cleanSlate(win, center, size)
+            cleanSlate(win)
+            grimButton, smileButton, winkButton, frownButton, quitButton = \
+    makeButtons(win)
             theFace = Face(win, center, size)
         elif smileButton.clicked(pt):
-            cleanSlate(win, center, size)
+            cleanSlate(win)
+            grimButton, smileButton, winkButton, frownButton, quitButton = \
+    makeButtons(win)
             theFace.smile(win, center, size)
         elif winkButton.clicked(pt):
-            cleanSlate(win, center, size)
+            cleanSlate(win)
+            grimButton, smileButton, winkButton, frownButton, quitButton = \
+    makeButtons(win)
             theFace.smile(win, center, size)
         elif frownButton.clicked(pt):
-            cleanSlate(win, center, size)
+            cleanSlate(win)
+            grimButton, smileButton, winkButton, frownButton, quitButton = \
+    makeButtons(win)
             theFace.frown(win, center, size)
         else:
             pass
+        pt = win.getMouse()
 
 def main():
 
