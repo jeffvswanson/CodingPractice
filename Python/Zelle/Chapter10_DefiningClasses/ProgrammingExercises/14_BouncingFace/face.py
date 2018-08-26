@@ -24,6 +24,14 @@ class Face:
         for item in self.mouth:
             item.draw(window)
 
+    def grim(self, window, center, size):
+        """Draws a grim face."""
+        self.head.draw(window)
+        self.leftEye.draw(window)
+        self.rightEye.draw(window)
+        for item in self.mouth:
+            item.draw(window)
+    
     def smile(self, window, center, size):
         """Draws a smiling face."""
         self.head.draw(window)

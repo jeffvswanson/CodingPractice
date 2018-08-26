@@ -31,8 +31,7 @@ def changeFace(win, center, size, theFace):
     index = randrange(0, len(faceList))
     faceList[index]
     if faceList[index] == "grim":
-        theFace = Face(win, center, size)
-        return theFace
+        return theFace.grim(win, center, size)
     elif faceList[index] == "smile":
         return theFace.smile(win, center, size)
     elif faceList[index] == "wink":
