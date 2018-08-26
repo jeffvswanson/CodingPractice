@@ -20,8 +20,9 @@ class Face:
         p1.move(-mouthSize/2, mouthOff)
         p2 = center.clone()
         p2.move(mouthSize/2, mouthOff)
-        self.mouth = Line(p1, p2)
-        self.mouth.draw(window)
+        self.mouth = [Line(p1, p2)]
+        for item in self.mouth:
+            item.draw(window)
 
     def smile(self, window, center, size):
         """Draws a smiling face."""
@@ -40,8 +41,9 @@ class Face:
         p3 = center.clone()
         p3.move(0, mouthSize)
         # Define smile
-        self.mouth = Polygon(p1, p2, p3)
-        self.mouth.draw(window)
+        self.mouth = [Polygon(p1, p2, p3)]
+        for item in self.mouth:
+            item.draw(window)
 
     def wink(self, window, center, size):
         """Draws a winking smiley face."""
@@ -66,9 +68,9 @@ class Face:
         p3 = center.clone()
         p3.move(0, mouthSize)
         # Define smile
-        self.mouth = Polygon(p1, p2, p3)
-        self.mouth.draw(window)
-
+        self.mouth = [Polygon(p1, p2, p3)]
+        for item in self.mouth[:]:
+            item.draw(window)
 
     def frown(self, window, center, size):
         """Draws a frowning face."""
@@ -91,12 +93,14 @@ class Face:
         p4 = p2.clone()
         p4.move(mouthSize/4, mouthOff/4)
         RFrown = Line(p2, p4)
-        self.mouth = [topMouth.draw(window), LFrown.draw(window), 
-        RFrown.draw(window)]
+        self.mouth = [topMouth, LFrown, RFrown]
+        for item in self.mouth:
+            item.draw(window)
 
     def moveFace(self, height, length, size, dx, dy):
         """Method to move the face around a window."""
         self.head.move(dx, dy)
         self.leftEye.move(dx, dy)
         self.rightEye.move(dx, dy)
-        self.mouth.move(dx, dy)
+        for item in self.mouth[:]:
+            item.move(dx, dy)

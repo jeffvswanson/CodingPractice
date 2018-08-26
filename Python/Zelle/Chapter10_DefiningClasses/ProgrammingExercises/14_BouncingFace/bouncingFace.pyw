@@ -27,6 +27,7 @@ def changeFace(win, center, size, theFace):
         item.undraw()
     win.update()
     faceList = ["grim", "smile", "wink", "frown"]
+    # Pick a random face to draw
     index = randrange(0, len(faceList))
     faceList[index]
     if faceList[index] == "grim":
