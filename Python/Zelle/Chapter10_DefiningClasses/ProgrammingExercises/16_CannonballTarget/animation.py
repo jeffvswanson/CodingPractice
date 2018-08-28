@@ -24,7 +24,7 @@ def main():
     angle, vel, height = 45.0, 40.0, 2.0
     # Interact with the user
     inputwin = InputDialog(angle, vel, height)
-    target = Target(win, width)
+    target = Target(win, width, angle, vel, height)
     p = (0, 1)
         # Loop for striking the target
     while target.hit(p) == False:
@@ -36,10 +36,12 @@ def main():
             # Create a shot and track until it hits target or leaves window
             angle, vel, height = inputwin.getValues()
             shot = ShotTracker(win, angle, vel, height)
-            while 0 <= (shot.getY() and -10 < shot.getX() <= 210) \
+            while (0 <= shot.getY() and -10 < shot.getX() <= 210) \
             or target.hit(p):
                 if target.hit(p) == True:
                     break
                 shot.update(1/50)
                 update(50)
 main()
+### Figure out how to break out of the nested while loop as it 
+### makes the overall loop infinite

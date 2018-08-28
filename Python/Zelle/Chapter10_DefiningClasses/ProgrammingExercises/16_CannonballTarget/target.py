@@ -1,7 +1,8 @@
 # target.py
+from random import randrange
+
 from graphics import *
 from projectile import Projectile
-from random import randrange
 from shotTracker import ShotTracker
 
 
@@ -10,10 +11,11 @@ class Target:
     """A target used in conjuction with animation.py. The hit(p) method returns
     true if the target is hit with the projectile."""
 
-    def __init__(self, window, width):
+    def __init__(self, window, width, angle, velocity, height):
         """Creates a rectangular target placed at a random x position at the 
         bottom of a window."""
         
+        self.proj = Projectile(angle, velocity, height)
         # Create the width of the rectangle base off the size of the window
         w = width/10
         # Use randrange to get the left edge of the rectangle
