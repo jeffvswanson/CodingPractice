@@ -9,6 +9,13 @@ from inputDialog import InputDialog
 from shotTracker import ShotTracker
 from target import Target
 
+def checkForHit(shot, target, p):
+    while (0 <= shot.getY() and -10 < shot.getX() <= 210) \
+    or target.hit(p):
+        shot.update(1/50)
+        update(50)
+    return target.hit(p)
+
 def main():
     # Create animation window
     win = GraphWin("Projectile Animation", 640, 480, autoflush=False)
@@ -25,23 +32,20 @@ def main():
     # Interact with the user
     inputwin = InputDialog(angle, vel, height)
     target = Target(win, width, angle, vel, height)
-    p = (0, 1)
+    p = (100, 20)
         # Loop for striking the target
-    while target.hit(p) == False:
+    print("first target.hit(p)", target.hit(p))
+    while target.hit(p):
         # Loop to shoot the projectile
-        while True:
-            choice = inputwin.interact()
-            if choice == "Quit": # Loop exit
-                break
-            # Create a shot and track until it hits target or leaves window
-            angle, vel, height = inputwin.getValues()
-            shot = ShotTracker(win, angle, vel, height)
-            while (0 <= shot.getY() and -10 < shot.getX() <= 210) \
-            or target.hit(p):
-                if target.hit(p) == True:
-                    break
-                shot.update(1/50)
-                update(50)
+        choice = inputwin.interact()
+        if choice == "Quit":
+            break
+        # Create a shot and track until it hits target or leaves window
+        angle, vel, height = inputwin.getValues()
+        shot = ShotTracker(win, angle, vel, height)
+        checkForHit(shot, target, p)
+        print("hitTarget = ", target.hit(p))
+    print("You hit the target or pressed quit.")
 main()
 ### Figure out how to break out of the nested while loop as it 
 ### makes the overall loop infinite

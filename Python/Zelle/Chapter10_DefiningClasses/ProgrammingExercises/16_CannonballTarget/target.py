@@ -24,8 +24,8 @@ class Target:
         # Define right edge of the rectangle
         self.xR = self.xL + w
         # Define y-values
-        self.yL = -10
-        self.yR = 0
+        self.yL = 0
+        self.yR = 5
         # Define the target rectangle
         self.Target = Rectangle(Point(self.xL, self.yL), \
         Point(self.xR, self.yR))
@@ -35,7 +35,7 @@ class Target:
     def hit(self, p):
         "Returns true if the projectile strikes the target"
         # Account for the edges of the projectile.
-        return ((self.xL <= (ShotTracker.getX(self) + 3))  and \
-        ((ShotTracker.getX(self) - 3) <= self.xR) and 
-        (self.yL <= (ShotTracker.getY(self) +3)) and 
-        ((ShotTracker.getY(self) + 3 <= self.yL)))
+        return ((self.xL <= self.proj.getX() + 3) or \
+        ((self.proj.getX() - 3) <= self.xR)) and \
+        (((self.proj.getY() - 3) <= self.yL) or \
+        ((self.proj.getY() + 3) <= self.yR))
