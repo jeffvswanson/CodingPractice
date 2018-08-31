@@ -9,11 +9,14 @@ from inputDialog import InputDialog
 from shotTracker import ShotTracker
 from target import Target
 
-def checkForHit(shot, target, p):
+def checkForHit(shot, target):
+    p = (shot.getX(), shot.getY())
     while (0 <= shot.getY() and -10 < shot.getX() <= 210) \
     or target.hit(p):
         shot.update(1/50)
         update(50)
+        p = (shot.getX(), shot.getY())
+        print("p=", p)
     return target.hit(p)
 
 def main():
@@ -34,8 +37,7 @@ def main():
     target = Target(win, width, angle, vel, height)
     p = (100, 20)
         # Loop for striking the target
-    print("first target.hit(p)", target.hit(p))
-    while target.hit(p):
+    while not(target.hit(p)):
         # Loop to shoot the projectile
         choice = inputwin.interact()
         if choice == "Quit":
@@ -43,9 +45,14 @@ def main():
         # Create a shot and track until it hits target or leaves window
         angle, vel, height = inputwin.getValues()
         shot = ShotTracker(win, angle, vel, height)
-        checkForHit(shot, target, p)
+        print("p=", p)
+        checkForHit(shot, target)
         print("hitTarget = ", target.hit(p))
     print("You hit the target or pressed quit.")
 main()
 ### Figure out how to break out of the nested while loop as it 
 ### makes the overall loop infinite
+
+## I want to add an introduction explaining the goal of the program
+
+## Probably have to do something with getting the ShotTracker to return the center

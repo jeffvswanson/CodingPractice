@@ -35,7 +35,12 @@ class Target:
     def hit(self, p):
         "Returns true if the projectile strikes the target"
         # Account for the edges of the projectile.
-        return ((self.xL <= self.proj.getX() + 3) or \
+        print("self.xL=", self.xL)
+        print("self.xR=", self.xR)
+        print("self.proj.getX()=", self.proj.getX())
+        print("self.proj.getY()=", self.proj.getY())
+        print("ShotTracker.getX()=", ShotTracker.getX(self))
+        return ((self.xL <= self.proj.getX() + 3) and \
         ((self.proj.getX() - 3) <= self.xR)) and \
-        (((self.proj.getY() - 3) <= self.yL) or \
-        ((self.proj.getY() + 3) <= self.yR))
+        (((self.proj.getY() + 3) <= self.yL) and \
+        ((self.proj.getY() - 3) <= self.yR))
