@@ -49,8 +49,8 @@ class InputDialog:
     def getValues(self):
         """ return input values """
         a = float(self.angle.getText())
-        v = float(self.angle.getText())
-        h = float(self.angle.getText())
+        v = float(self.vel.getText())
+        h = float(self.height.getText())
         return a, v, h
 
     def close(self):

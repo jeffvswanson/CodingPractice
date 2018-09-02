@@ -74,8 +74,6 @@ def checkForHit(shot, target):
         shot.update(1/50)
         update(50)
         p = Point(shot.getX(), shot.getY())
-        print("p=", p)
-        print("hitTarget = ", target.hit(p))
     return p
 
 def Outro(win, result):
