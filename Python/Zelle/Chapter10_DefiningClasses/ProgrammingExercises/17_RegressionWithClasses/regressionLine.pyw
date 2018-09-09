@@ -17,14 +17,20 @@ from regressionClass import Regression
 
 def createWindow():
     win = GraphWin("Linear Regression Chart", 500, 550)
-    win.setCoords(0.0, 0.0, 50.0, 55.0)
+    # xU is the upper bound of the x-coodinate system
+    # Used to help draw the x-axis and line of regression
+    xU = 50.0
+    win.setCoords(0.0, 0.0, xU, 55.0)
     win.setBackground("white")
     
     yaxis = Line(Point(5, 5), Point(5, 50))
     yaxis.draw(win)
     Text(Point(4, 50), "y").draw(win)
 
-    xaxis = Line(Point(5, 5), Point(45, 5))
+    # Set up the x-axis endpoints based off the coordinate system
+    xL = 0.1 * xU
+    xR = xU - (0.1 * xU)
+    xaxis = Line(Point(xL, 5), Point(xR, 5))
     xaxis.draw(win)
     Text(Point(46, 5), "x").draw(win)
 
@@ -35,9 +41,9 @@ def createWindow():
     quitmessage = Text(Point(6, 2.5), "Done")
     quitmessage.draw(win)
 
-    return win
+    return win, xL, xR
 
-def getPoints(win):
+def getPoints(win, regressionLine):
     p = Point(0, 0)
 
     message = Text(Point(25, 27.5), "Please click inside the axis area").draw(win)
@@ -49,11 +55,10 @@ def getPoints(win):
             message.draw(win)
         else:
             message.undraw()
-            points.append(p)
             p.draw(win)
-            Regression.addPoint(p)
-
-    return message
+            regressionLine.addPoint(p)
+    message.undraw()
+    return
 
 def main():
 
@@ -67,13 +72,11 @@ def main():
     # Plot the linear regression
     # Wait for a final mouseclick to close the window
 
-    win = createWindow()
-
-    message = getPoints(win)
-    # Undraw the last message from the while loop.
-    message.undraw()
+    win, xL, xR = createWindow()
+    regressionLine = Regression(win)
+    getPoints(win, regressionLine)
     
-    Regression(win)
+    regressionLine.drawLine(xL, xR)
     
     message = Text(Point(25, 52.5), "Click anywhere to quit.")
     message.draw(win)

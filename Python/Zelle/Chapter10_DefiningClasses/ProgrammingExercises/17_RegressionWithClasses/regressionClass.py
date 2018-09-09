@@ -2,7 +2,7 @@
 
 """regressionClass.py
 Provides a class to support linear
-regression modelling."""
+regression modeling."""
 
 from graphics import *
 
@@ -14,43 +14,47 @@ class Regression:
         """Creates the line of regression object do which points can be added."""
         self.win = win
         self.pointsList = []
-        self.rPoint, self.lPoint = 
-            __calcRegressionLineEndPoints(self.pointsList)
-
-        self.lineOfRegression = Line(self.rPoint, self.lPoint)
-        self.lineOfRegression.setOutline("Orange")
-        self.lineOfRegression.draw(win)
+        self.sumX, self.sumY = 0, 0
+        self.sumXSquared = 0
+        self.sumXY = 0
 
     def addPoint(self, point):
         """Adds a point to the line of regression."""
         self.pointsList.append(point)
 
-    def predict(self):
+    def predict(self, x):
         """Accepts a value of x as a parameter, and returns the value of the 
         corresponding y on the line of best fit."""
+        b = self.rPoint.getY() - self.lineSlope * self.rPoint.getX()
+        y = self.lineSlope * x + b
+        print("The y-value at {0} is {1}".format(x, y))
 
-    def __calcRegressionLineEndPoints(self, pointsList):
-        """Internal function to calculate the regression line slope."""
-        n = len(self.pointsList)
-        for pt in self.pointsList:
-            sumX = sumX + pt.getX()
-            sumY = sumY + pt.getY()
-            sumXSquared = sumXSquared + (pt.getX()) ** 2
-            sumXY = sumXY + (pt.getX() * pt.getY())
+    def drawLine(self, xL, xR):
+        """Draws the regression line"""
+        self.rPoint, self.lPoint, self.lineSlope = self.__calcRegressionLineEndPoints(self.pointsList, xL, xR)
 
-        avgX = sumX / n
-        avgY = sumY / n
-        lineSlope = (sumXY - n * avgX * avgY)/(sumXSquared - n * avgX ** 2)
+        self.lineOfRegression = Line(self.rPoint, self.lPoint)
+        self.lineOfRegression.setOutline("Orange")
+        self.lineOfRegression.draw(self.win)
+ 
+    def __calcRegressionLineEndPoints(self, pointsList, xL, xR):
+        """Internal function to calculate the regression line endpoints."""
+        n = len(pointsList)
+        for pt in pointsList:
+            self.sumX = self.sumX + pt.getX()
+            self.sumY = self.sumY + pt.getY()
+            self.sumXSquared = self.sumXSquared + (pt.getX()) ** 2
+            self.sumXY = self.sumXY + (pt.getX() * pt.getY())
 
-        # Set the left and right limits according to the coordinate system
-        x1 = 5
-        x2 = 45
+        avgX = self.sumX / n
+        avgY = self.sumY / n
+        lineSlope = (self.sumXY - n * avgX * avgY)/(self.sumXSquared - n * avgX ** 2)
 
-        y1 = avgY + lineSlope * (x1 - avgX)
-        y2 = avgY + lineSlope * (x2 - avgX)
+        y1 = avgY + lineSlope * (xL - avgX)
+        y2 = avgY + lineSlope * (xR - avgX)
 
-        rPoint = Point(x1, y1)
-        lPoint = Point(x2, y2)
+        rPoint = Point(xL, y1)
+        lPoint = Point(xR, y2)
 
-        return rPoint, lPoint
+        return rPoint, lPoint, lineSlope
         
