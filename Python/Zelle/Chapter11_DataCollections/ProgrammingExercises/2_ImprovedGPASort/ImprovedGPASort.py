@@ -18,10 +18,29 @@ def getFileName():
     return filename
 
 def howToSort():
-    sortChoice = input("How do you want the data sorted? \
-    1 = GPA, 2 = name, 3 = credits")
-    # Dos a try except test to get the sortChoice
+    choices = [1, 2, 3]
+    while True:
+        try:
+            sortChoice = int(input("How do you want the data sorted? \
+(1 = GPA, 2 = name, 3 = credits) "))
+        except (SyntaxError, NameError, TypeError, ValueError):
+            print("You have to enter a 1, 2, or 3.")
+            continue  
+        if sortChoice in choices:
+            break
+        else:
+            print("You have to enter a 1, 2, or 3.")
+            continue
     return sortChoice
+
+def pickSort(sortChoice, filename):
+    if sortChoice == 1:
+        data = gpaSort(filename)
+    elif sortChoice == 2:
+        data = nameSort(filename)
+    else:
+        data = creditSort(filename)
+    return data
 
 def readStudents(filename):
     infile = open(filename, 'r')
@@ -42,23 +61,25 @@ def writeStudents(students, filename):
 def gpaSort(filename):
     data = readStudents(filename)
     data.sort(key=Student.gpa)
+    return data
 
 def nameSort(filename):
     data = readStudents(filename)
     data.sort(key=Student.getName)
+    return data
 
 def creditSort(filename):
     data = readStudents(filename)
     data.sort(key=Student.getHours)
+    return data
 
 def main():
     print("This program sorts student information by GPA, name, or credits.")
     filename = getFileName()
     sortChoice = howToSort()
-    # Do a routine that takes sortChoice and goes to the correct sort returning the information
-
+    data = pickSort(sortChoice, filename)
     filename = input("Enter a name for the output file: ")
-    writeStudents(info, filename)
+    writeStudents(data, filename)
     print("The data has been written to", filename)
 
 if __name__ == '__main__':
