@@ -1,4 +1,4 @@
-# improvedGPASort.py
+# GPASort.py
 # A program to sort student information by GPA, name, or credits.
 """Extend the gpasort program so that it allows the user to sort a file of
 students based on GPA, name, or credits. Your program should prompt for the
