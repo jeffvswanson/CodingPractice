@@ -1,2 +1,2 @@
 # CodingPracticePython
-A repository of Python practice problems I have worked through.
+A repository of Python and Go practice problems I have worked through.
